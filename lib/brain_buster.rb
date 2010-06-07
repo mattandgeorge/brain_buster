@@ -7,7 +7,7 @@ class BrainBuster < CouchRest::ExtendedDocument
 
 	VERSION = "0.8.3"
 
-	use_database COUCHDB_SERVER.database #"mgsite_" + Rails.env
+	#use_database COUCHDB_SERVER.database #"mgsite_" + Rails.env
 
 	property :question
 	property :answer
