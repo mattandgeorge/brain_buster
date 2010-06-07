@@ -1,13 +1,13 @@
 require 'humane_integer'
 
  # Simple model to hold sets of questions and answers.
-class BrainBuster < CouchRestRails::Document 
+class BrainBuster < CouchRest::ExtendedDocument
 	extend ActiveModel::Naming
   include ActiveModel::Conversion
 
 	VERSION = "0.8.3"
 
-	use_database :mgsite
+	use_database "mgsite_" + Rails.env
 
 	property :question
 	property :answer
