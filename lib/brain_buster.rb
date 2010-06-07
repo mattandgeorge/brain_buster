@@ -1,8 +1,23 @@
 require 'humane_integer'
 
  # Simple model to hold sets of questions and answers.
-class BrainBuster < ActiveRecord::Base
-  VERSION = "0.8.3"
+class BrainBuster < CouchRest::ExtendedDocument
+	extend ActiveModel::Naming
+  include ActiveModel::Conversion
+
+	VERSION = "0.8.3"
+
+	use_database :mgsite
+	property :question
+	property :answer
+
+	def persisted?
+    !(new? || destroyed?)	
+  end
+
+  def destroyed?
+    @destroyed
+  end
 
   # Attempt to answer a captcha, returns true if the answer is correct.
   def attempt?(string)
