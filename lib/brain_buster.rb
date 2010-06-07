@@ -7,7 +7,7 @@ class BrainBuster < CouchRestRails::Document
 
 	VERSION = "0.8.3"
 
-	use_database :mgsite
+	#use_database :mgsite
 
 	property :question
 	property :answer
