@@ -1,4 +1,5 @@
 require 'humane_integer'
+require 'couchrest-uniqueness-validation'
 
  # Simple model to hold sets of questions and answers.
 class BrainBuster < CouchRest::ExtendedDocument
