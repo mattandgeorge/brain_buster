@@ -10,6 +10,12 @@ class BrainBuster < CouchRest::ExtendedDocument
 	property :question
 	property :answer
 
+	def self.create(question, answer, bulk = false)
+		self.question = question
+		self.answer = answer
+		super.create(bulk)
+	end
+
   # Attempt to answer a captcha, returns true if the answer is correct.
   def attempt?(string)
     string = string.strip.downcase
