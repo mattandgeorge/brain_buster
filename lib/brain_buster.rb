@@ -13,7 +13,7 @@ class BrainBuster < CouchRest::ExtendedDocument
 	view_by :random => {
 		:map => 
 			"function(doc) {
-				if (doc['couchrest-type'] == 'BrainBuster') {
+				if (doc['couchrest-type'] == '#{self.class}') {
         	emit(doc._id, doc);
         }
 			}
