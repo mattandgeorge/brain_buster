@@ -10,20 +10,6 @@ class BrainBuster < CouchRest::ExtendedDocument
 	property :question
 	property :answer
 
-	view_by :random => {
-		:map => 
-			"function(doc) {
-				if (doc['couchrest-type'] == '#{self.class}') {
-        	emit(doc._id, doc);
-        }
-			}
-		",
-		:reduce => 
-			"function(keys, values) {
-				return values.length;
-			}"
-	}
-
   # Attempt to answer a captcha, returns true if the answer is correct.
   def attempt?(string)
     string = string.strip.downcase
@@ -55,13 +41,17 @@ class BrainBuster < CouchRest::ExtendedDocument
   private
   
   def self.find_random
-    find(:first, :order => random_function)
+		i = Random.new(0..all.length-1)
+		if all.length > 0
+			all[i]
+		end
   end
   
   def self.find_specific_or_fallback(id)
-    find(id)
-  rescue ActiveRecord::RecordNotFound
-    find_random
+    result = get(id)
+		if !result
+    	find_random
+		end
   end
   
   def answer_is_integer?
