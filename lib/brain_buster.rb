@@ -56,10 +56,12 @@ class BrainBuster < CouchRest::ExtendedDocument
 
   def self.find_specific_or_fallback(id)
     result = get(id)
+		debugger
 		if !result
     	find_random
 		end
   end
+
   private
   
   def self.find_random
