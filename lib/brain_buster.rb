@@ -8,7 +8,21 @@ class BrainBuster < CouchRest::ExtendedDocument
 	VERSION = "0.8.3"
 
 	property :question
-	property :answer	
+	property :answer
+
+	view_by :random => {
+		:map => 
+			"function(doc) {
+				if (doc['couchrest-type'] == 'BrainBuster') {
+        	emit(doc._id, doc);
+        }
+			}
+		",
+		:reduce => 
+			"function(keys, values) {
+				return values.length;
+			}"
+	}
 
   # Attempt to answer a captcha, returns true if the answer is correct.
   def attempt?(string)
