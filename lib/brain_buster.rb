@@ -14,8 +14,8 @@ class BrainBuster < CouchRest::ExtendedDocument
 
 	def self.create(question, answer)
 		# Don't duplicate questions
-		existing_question = by_question(:key => question)
-		if !existing_question
+		existing_questions = by_question(:key => question)
+		if existing_questions.length == 0
 			instance = new
 			instance.question = question
 			instance.answer = answer
