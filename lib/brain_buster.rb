@@ -25,12 +25,14 @@ class BrainBuster < CouchRest::ExtendedDocument
   end
 
   def self.random_function
-    case connection.adapter_name.downcase
-      when /sqlite/, /postgres/ then "random()"
-      else                           "rand()"
-    end
+		""
+    #case connection.adapter_name.downcase
+    #  when /sqlite/, /postgres/ then "random()"
+    #  else                           "rand()"
+    #end
   end
-
+	
+	# Borrowed from CouchRestRails
 	def self.use_database(db)
 		db = [COUCHDB_CONFIG[:db_prefix], db.to_s, COUCHDB_CONFIG[:db_suffix]].join
 		self.database = COUCHDB_SERVER.database(db)
@@ -39,7 +41,7 @@ class BrainBuster < CouchRest::ExtendedDocument
   private
   
   def self.find_random
-    find(:first, :order => random_function) 
+    find(:first, :order => random_function)
   end
   
   def self.find_specific_or_fallback(id)
