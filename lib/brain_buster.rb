@@ -10,6 +10,8 @@ class BrainBuster < CouchRest::ExtendedDocument
 	property :question
 	property :answer
 
+	view_by :question
+
 	def self.create(question, answer)
 		# Don't duplicate questions
 		existing_question = by_question(:key => question)
