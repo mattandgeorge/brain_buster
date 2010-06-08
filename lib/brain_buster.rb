@@ -1,25 +1,27 @@
 require 'humane_integer'
-#require 'couchrest-uniqueness-validation'
 
  # Simple model to hold sets of questions and answers.
 class BrainBuster < CouchRest::ExtendedDocument
 	extend ActiveModel::Naming
   include ActiveModel::Conversion
-	include CouchRest::Validation
 
 	VERSION = "0.8.3"
 
 	property :question
 	property :answer
 
-	validates_uniqueness_of :question
-
 	def self.create(question, answer)
-		instance = new
-		instance.question = question
-		instance.answer = answer
-    instance.create
-    instance
+		# Don't duplicate questions
+		existing_question = by_question(:key => question)
+		if !existing_question
+			instance = new
+			instance.question = question
+			instance.answer = answer
+    	instance.create
+    	instance
+		else
+			nil
+		end
 	end
 
   # Attempt to answer a captcha, returns true if the answer is correct.
