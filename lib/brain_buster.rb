@@ -54,13 +54,13 @@ class BrainBuster < CouchRest::ExtendedDocument
 		self.database = COUCHDB_SERVER.database(db)
 	end
 
-  def self.find_specific_or_fallback(id)
+  private
+  
+	def self.find_specific_or_fallback(id)
     r = get(id)
 		return find_random if r == nil
 		r
   end
-
-  private
   
   def self.find_random
 		i = rand(all.length)
@@ -68,7 +68,6 @@ class BrainBuster < CouchRest::ExtendedDocument
 			all[i]
 		end
   end
-  
   
   def answer_is_integer?
     int_answer = answer.to_i
