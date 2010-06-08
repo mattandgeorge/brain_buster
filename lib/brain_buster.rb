@@ -1,10 +1,11 @@
 require 'humane_integer'
-require 'couchrest-uniqueness-validation'
+#require 'couchrest-uniqueness-validation'
 
  # Simple model to hold sets of questions and answers.
 class BrainBuster < CouchRest::ExtendedDocument
 	extend ActiveModel::Naming
   include ActiveModel::Conversion
+	include CouchRest::Validation
 
 	VERSION = "0.8.3"
 
