@@ -41,7 +41,7 @@ class BrainBuster < CouchRest::ExtendedDocument
   private
   
   def self.find_random
-		i = Random.new(0..all.length-1)
+		i = rand(0..all.length-1)
 		if all.length > 0
 			all[i]
 		end
