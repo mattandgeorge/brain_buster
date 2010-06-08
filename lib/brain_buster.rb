@@ -10,6 +10,8 @@ class BrainBuster < CouchRest::ExtendedDocument
 	property :question
 	property :answer
 
+	validates_uniqueness_of :question
+
 	def self.create(question, answer)
 		instance = new
 		instance.question = question
