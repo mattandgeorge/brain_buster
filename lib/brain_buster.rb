@@ -7,18 +7,8 @@ class BrainBuster < CouchRest::ExtendedDocument
 
 	VERSION = "0.8.3"
 
-	#use_database "mgsite" #COUCHDB_SERVER.database #"mgsite_" + Rails.env
-	
 	property :question
-	property :answer
-
-	def persisted?
-    !(new? || destroyed?)	
-  end
-
-  def destroyed?
-    @destroyed
-  end
+	property :answer	
 
   # Attempt to answer a captcha, returns true if the answer is correct.
   def attempt?(string)
