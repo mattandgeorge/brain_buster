@@ -7,8 +7,8 @@ class BrainBuster < CouchRest::ExtendedDocument
 
 	VERSION = "0.8.3"
 
-	#use_database COUCHDB_SERVER.database #"mgsite_" + Rails.env
-
+	#use_database "mgsite" #COUCHDB_SERVER.database #"mgsite_" + Rails.env
+	
 	property :question
 	property :answer
 
@@ -40,6 +40,11 @@ class BrainBuster < CouchRest::ExtendedDocument
       else                           "rand()"
     end
   end
+
+	def self.use_database(db)
+		db = [COUCHDB_CONFIG[:db_prefix], db.to_s, COUCHDB_CONFIG[:db_suffix]].join
+		self.database = COUCHDB_SERVER.database(db)
+	end
 
   private
   
